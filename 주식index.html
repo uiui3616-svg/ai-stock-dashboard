@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI 기반 종합 투자 분석 대시보드</title>
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #111;
+      font-family: 'Malgun Gothic', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #f5f5f5;
+      padding: 1.2rem;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    header p {
+      color: #555;
+      margin-top: 0.4rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .section {
+      margin-bottom: 3rem;
+    }
+    .section h2 {
+      border-left: 6px solid #4a90e2;
+      padding-left: 0.75rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    .card {
+      background: #fafafa;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    }
+    .tradingview-widget-container {
+      margin-top: 1rem;
+    }
+    .analysis {
+      background-color: #f0f0f0;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-left: 4px solid #4a90e2;
+      border-radius: 6px;
+      color: #222;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 0.75rem;
+      text-align: center;
+    }
+    th {
+      background-color: #e0e0e0;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #f5f5f5;
+      color: #777;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📊 AI 기반 종합 투자 분석 대시보드</h1>
+    <p>실시간 차트 + 섹터 분석 + 경제지표 & 환율 & 전략</p>
+  </header>
+
+  <div class="container">
+
+    <!-- 지수 & 환율 -->
+    <section class="section">
+      <h2>📈 주요 지수 & 환율</h2>
+
+      <div class="card">
+        <strong>NASDAQ 100 (미국)</strong>
+        <div class="tradingview-widget-container">
+          <div id="nasdaq"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js">
+          {
+            "symbols": [["NASDAQ:NDX"]],
+            "width": "100%",
+            "height": "450",
+            "locale": "ko",
+            "colorTheme": "light",
+            "isTransparent": false,
+            "showChart": true
+          }
+          </script>
+        </div>
+      </div>
+
+      <div class="card">
+        <strong>KOSPI (한국)</strong>
+        <div class="tradingview-widget-container">
+          <div id="kospi"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js">
+          {
+            "symbols": [["KRX:KOSPI"]],
+            "width": "100%",
+            "height": "450",
+            "locale": "ko",
+            "colorTheme": "light",
+            "isTransparent": false,
+            "showChart": true
+          }
+          </script>
+        </div>
+      </div>
+
+      <div class="card">
+        <strong>USD/KRW 환율</strong>
+        <div class="tradingview-widget-container">
+          <div id="usdkor"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js">
+          {
+            "symbols": [["FX_IDC:USDKRW"]],
+            "width": "100%",
+            "height": "450",
+            "locale": "ko",
+            "colorTheme": "light",
+            "isTransparent": false,
+            "showChart": true
+          }
+          </script>
+        </div>
+      </div>
+    </section>
+
+      <!-- 미국 주요 종목 -->
+    <section class="section">
+      <h2>🇺🇸 미국 주요 종목 분석</h2>
+
+      <!-- NVIDIA -->
+      <div class="card">
+        <strong>AI: NVIDIA (NVDA)</strong>
+        <div class="tradingview-widget-container">
+          <div id="nvda"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js">
+          {
+            "symbols": [["NASDAQ:NVDA"]],
+            "width": "100%",
+            "height": "450",
+            "locale": "ko",
+            "colorTheme": "light",
+            "isTransparent": false,
+            "showChart": true
+          }
+          </script>
+        </div>
+        <div class="analysis">
+          • 매수 제안: $165–180 (조정 시)<br>
+          • 매도 제안: $210 이상 또는 과열 구간<br><br>
+          <strong>전략 이유:</strong><br>
+          AI 칩 수요 급증, 메타·MS 투자 확대. 최근 고점 대비 눌림 → 진입 구간으로 판단. FOMC 완화 기대감도 반영.
+        </div>
+      </div>
+
+      <!-- Tesla -->
+      <div class="card">
+        <strong>전기차: Tesla (TSLA)</strong>
+        <div class="tradingview-widget-container">
+          <div id="tsla"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js">
+          {
+            "symbols": [["NASDAQ:TSLA"]],
+            "width": "100%",
+            "height": "450",
+            "locale": "ko",
+            "colorTheme": "light",
+            "isTransparent": false,
+            "showChart": true
+          }
+          </script>
+        </div>
+        <div class="analysis">
+          • 매수 제안: $420–430<br>
+          • 매도 제안: $500 이상<br><br>
+          <strong>전략 이유:</strong><br>
+          사이버트럭 출시, IRA 수혜 기대감 있음. 다만 실적 부진 영향 여전 → 저점 매수 유효.
+        </div>
+      </div>
+
+      <!-- Berkshire Hathaway -->
+      <div class="card">
+        <strong>금융: Berkshire Hathaway (BRK.B)</strong>
+        <div class="tradingview-widget-container">
+          <div id="brkb"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js">
+          {
+            "symbols": [["NYSE:BRK.B"]],
+            "width": "100%",
+            "height": "450",
+            "locale": "ko",
+            "colorTheme": "light",
+            "isTransparent": false,
+            "showChart": true
+          }
+          </script>
+        </div>
+        <div class="analysis">
+          • 매수 제안: $460–470<br>
+          • 매도 제안: $520 이상<br><br>
+          <strong>전략 이유:</strong><br>
+          가치주 선호 회복세. 금리 인하 가능성 시 보험·전통 금융 우위 지속 예상.
+        </div>
+      </div>
+
+      <!-- Exxon Mobil -->
+      <div class="card">
+        <strong>에너지: ExxonMobil (XOM)</strong>
+        <div class="tradingview-widget-container">
+          <div id="xom"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js">
+          {
+            "symbols": [["NYSE:XOM"]],
+            "width": "100%",
+            "height": "450",
+            "locale": "ko",
+            "colorTheme": "light",
+            "isTransparent": false,
+            "showChart": true
+          }
+          </script>
+        </div>
+        <div class="analysis">
+          • 매수 제안: $105–110<br>
+          • 매도 제안: $130 이상<br><br>
+          <strong>전략 이유:</strong><br>
+          중동 리스크 + 유가 상승 시 에너지 수혜 지속. 연말 계절 수요 고려.
+        </div>
+      </div>
+    </section>
+
+    <!-- 한국 종목 -->
+    <section class="section">
+      <h2>🇰🇷 한국 주요 종목 분석</h2>
+
+      <!-- SK하이닉스 -->
+      <div class="card">
+        <strong>AI: SK하이닉스 (000660)</strong>
+        <div class="tradingview-widget-container">
+          <div id="skhynix"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js">
+          {
+            "symbols": [["KRX:000660"]],
+            "width": "100%",
+            "height": "450",
+            "locale": "ko",
+            "colorTheme": "light",
+            "isTransparent": false,
+            "showChart": true
+          }
+          </script>
+        </div>
+        <div class="analysis">
+          • 매수 제안: 10% 눌림 시<br>
+          • 매도 제안: 60만원 이상<br><br>
+          <strong>전략 이유:</strong><br>
+          반도체 업황 회복 본격화 중, 외국인 수급 강세. 고점 부근 도달 시 익절 고려.
+        </div>
+      </div>
+
+      <!-- LG에너지솔루션 -->
+      <div class="card">
+        <strong>2차전지: LG에너지솔루션 (373220)</strong>
+        <div class="tradingview-widget-container">
+          <div id="lgenergy"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js">
+          {
+            "symbols": [["KRX:373220"]],
+            "width": "100%",
+            "height": "450",
+            "locale": "ko",
+            "colorTheme": "light",
+            "isTransparent": false,
+            "showChart": true
+          }
+          </script>
+        </div>
+        <div class="analysis">
+          • 매수 제안: 38만원 이하<br>
+          • 매도 제안: 47만원 이상<br><br>
+          <strong>전략 이유:</strong><br>
+          IRA 보조금 지속 + 전기차 수요 회복. 저점 지지 강하게 형성됨.
+        </div>
+      </div>
+
+      <!-- KB금융 -->
+      <div class="card">
+        <strong>금융: KB금융 (105560)</strong>
+        <div class="tradingview-widget-container">
+          <div id="kb"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js">
+          {
+            "symbols": [["KRX:105560"]],
+            "width": "100%",
+            "height": "450",
+            "locale": "ko",
+            "colorTheme": "light",
+            "isTransparent": false,
+            "showChart": true
+          }
+          </script>
+        </div>
+        <div class="analysis">
+          • 매수 제안: 12만원대 지지 시<br>
+          • 매도 제안: 14.5만원 이상<br><br>
+          <strong>전략 이유:</strong><br>
+          금리 안정 + 배당주 수요 회복 기대. PER·PBR 낮은 구간 지속.
+        </div>
+      </div>
+
+      <!-- 한국가스공사 -->
+      <div class="card">
+        <strong>에너지: 한국가스공사 (036460)</strong>
+        <div class="tradingview-widget-container">
+          <div id="kogas"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js">
+          {
+            "symbols": [["KRX:036460"]],
+            "width": "100%",
+            "height": "450",
+            "locale": "ko",
+            "colorTheme": "light",
+            "isTransparent": false,
+            "showChart": true
+          }
+          </script>
+        </div>
+        <div class="analysis">
+          • 매수 제안: 4만원 이하<br>
+          • 매도 제안: 4.5만원 이상<br><br>
+          <strong>전략 이유:</strong><br>
+          겨울철 수요 증가 + 전력요금 영향. 에너지 비용 하락 시 기대 수익 존재.
+            </div>
+  </div>
+</section>
+
+<!-- 환율 전략 -->
+<section class="section">
+  <h2>💱 환율 전략</h2>
+  <div class="card">
+    <strong>USD/KRW</strong>
+    <div class="tradingview-widget-container">
+      <div id="usdkor"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js">
+      {
+        "symbols": [["FX_IDC:USDKRW"]],
+        "width": "100%",
+        "height": "450",
+        "locale": "ko",
+        "colorTheme": "light",
+        "isTransparent": false,
+        "showChart": true
+      }
+      </script>
+    </div>
+    <div class="analysis">
+      • 현재 환율 약 1,468원<br>
+      • 1,450~1,470 구간에서 분할 환전 고려 가능<br><br>
+      <strong>전략 이유:</strong><br>
+      CPI 하락 + 금리 인하 기대감 → 원화 강세 전환 가능성 주의. 외환 수급 안정 추세.
+    </div>
+  </div>
+</section>
+
+<!-- 뉴스 & 경제지표 -->
+<section class="section">
+  <h2>📰 최신 금융 뉴스 요약</h2>
+  <div class="card">
+    <ul>
+      <li><strong>[연합뉴스]</strong> 12월 CPI 3.0% 발표 → 예상치 하회 → 금리 인하 기대 강화</li>
+      <li><strong>[매일경제]</strong> 연준 12월 FOMC 회의 앞두고 기술주 상승세</li>
+      <li><strong>[한국경제]</strong> 환율 하락세 진정, 외국인 수급 재진입 기대</li>
+    </ul>
+    <div class="analysis">
+      🧠 <strong>AI 해석:</strong><br>
+      CPI 둔화 → 금리 인하 기대 상승. 기술주·수출주 매수세 강화. 환율 안정 시 외국인 순매수 지속 기대.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📅 주요 경제지표 발표 일정</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>날짜</th>
+          <th>지표</th>
+          <th>예상치</th>
+          <th>이슈</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>12월 10일</td>
+          <td>FOMC 금리 발표</td>
+          <td>5.00% 예상 (인하 가능성)</td>
+          <td>시장 방향성 결정</td>
+        </tr>
+        <tr>
+          <td>12월 11일</td>
+          <td>실업수당 청구건수</td>
+          <td>21.5만 건</td>
+          <td>노동시장 안정 여부</td>
+        </tr>
+        <tr>
+          <td>12월 12일</td>
+          <td>생산자물가지수 (PPI)</td>
+          <td>1.2%</td>
+          <td>물가 압력 확인</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
